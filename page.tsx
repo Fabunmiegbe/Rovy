@@ -1,134 +1,156 @@
 import Navbar from "@/components/Navbar";
-import MintPanel from "@/components/MintPanel";
-import RoadmapTrail from "@/components/RoadmapTrail";
 import Link from "next/link";
 
-export default function Home() {
+function Section({
+  n,
+  title,
+  children,
+}: {
+  n: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="border-t border-line py-10 first:border-t-0 first:pt-0">
+      <div className="flex items-baseline gap-4">
+        <span className="font-mono text-sm text-brass">{n}</span>
+        <h2 className="font-display text-2xl text-paper">{title}</h2>
+      </div>
+      <div className="mt-5 max-w-prose space-y-4 text-sm leading-relaxed text-muted">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+export default function Whitepaper() {
   return (
     <main>
       <Navbar />
+      <div className="mx-auto max-w-3xl px-6 py-16">
+        <p className="font-mono text-xs uppercase tracking-wide text-brass">
+          Rovyn — Whitepaper — v1.0
+        </p>
+        <h1 className="mt-4 font-display text-4xl text-paper">
+          The Rovyn field log
+        </h1>
+        <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted">
+          This document explains what Rovyn is, how the mint works, where the
+          money goes, and what to expect after launch. It is written to be
+          read before you mint, not after.
+        </p>
 
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 pt-16 md:pt-24">
-        <div className="grid gap-12 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-wide text-brass">
-              Robinhood Chain · 4663
-            </p>
-            <h1 className="mt-4 font-display text-4xl leading-[1.1] text-paper md:text-6xl">
-              5,555 waypoints.
-              <br />
-              One open route.
-            </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted">
-              Rovyn is a fixed-supply collection minted directly on Robinhood
-              Chain. No allowlist, no presale tiers — a wallet, a mint
-              transaction, a waypoint.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="#mint"
-                className="bg-brass px-6 py-3 text-sm font-medium text-ink transition hover:bg-brass-dim"
-              >
-                Mint a waypoint
-              </a>
-              <Link
-                href="/whitepaper"
-                className="border border-line px-6 py-3 text-sm text-paper transition hover:border-brass"
-              >
-                Read the whitepaper
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <svg viewBox="0 0 220 220" className="w-56 md:w-72">
-              <circle cx="110" cy="110" r="100" stroke="#2A3038" strokeWidth="1" fill="none" />
-              <circle cx="110" cy="110" r="70" stroke="#2A3038" strokeWidth="1" fill="none" />
-              {Array.from({ length: 24 }).map((_, i) => {
-                const angle = (i / 24) * Math.PI * 2;
-                const x1 = 110 + Math.cos(angle) * 100;
-                const y1 = 110 + Math.sin(angle) * 100;
-                const x2 = 110 + Math.cos(angle) * 94;
-                const y2 = 110 + Math.sin(angle) * 94;
-                return (
-                  <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#2A3038" strokeWidth="1" />
-                );
-              })}
-              <path d="M110 40 L124 110 L110 180 L96 110 Z" fill="#C9A24B" />
-              <path d="M40 110 L110 96 L180 110 L110 124 Z" fill="#6E8CA0" opacity="0.6" />
-              <circle cx="110" cy="110" r="6" fill="#12151A" stroke="#C9A24B" strokeWidth="2" />
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      {/* Mint */}
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <h2 className="font-display text-2xl text-paper md:text-3xl">
-              The mint is the manifest.
-            </h2>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Every waypoint minted is logged on-chain in the order it's
-              claimed. There's no hidden reserve beyond the 100 pieces set
-              aside for the team and future giveaways — everything else is
-              first come, first served at a flat price.
-            </p>
-          </div>
-          <MintPanel />
-        </div>
-      </section>
-
-      {/* Roadmap */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <h2 className="font-display text-2xl text-paper md:text-3xl">The route so far</h2>
-          <p className="mt-3 max-w-md text-sm text-muted">
-            Five waypoints from setup to secondary trading. No promised
-            price targets — just what's shipped and what's next.
+        <Section n="01" title="What Rovyn is">
+          <p>
+            Rovyn is a fixed-supply collection of 5,555 ERC-721 tokens
+            deployed on Robinhood Chain, an Ethereum-compatible Layer 2 built
+            on the Arbitrum Orbit stack. Each token — a "waypoint" — is a
+            unique piece of generated art with its own trait combination and
+            rank, recorded permanently on-chain.
           </p>
-          <div className="mt-14">
-            <RoadmapTrail />
-          </div>
-        </div>
-      </section>
+          <p>
+            There is no companion token. Rovyn is a collectible NFT project.
+            Nothing in this document should be read as an offer of
+            securities, a promise of price appreciation, or investment
+            advice.
+          </p>
+        </Section>
 
-      {/* Whitepaper teaser */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <div className="grid gap-10 md:grid-cols-2">
-            <div>
-              <h2 className="font-display text-2xl text-paper md:text-3xl">
-                Read the full log before you mint.
-              </h2>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-                Supply breakdown, treasury handling, the contract address once
-                it's live, and what holding a Rovyn waypoint actually gets
-                you. No promised returns — this is a collectible, not a
-                security.
-              </p>
-              <Link
-                href="/whitepaper"
-                className="mt-6 inline-block border border-brass/60 px-6 py-3 text-sm text-brass transition hover:bg-brass hover:text-ink"
-              >
-                Open whitepaper
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+        <Section n="02" title="Supply and mint mechanics">
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Total supply: 5,555 waypoints, hard-capped in the contract.</li>
+            <li>Mint price: 0.01 ETH per waypoint, paid in ETH (Robinhood Chain's gas token).</li>
+            <li>Per-wallet limit: 5 waypoints, enforced on-chain.</li>
+            <li>Team/community reserve: 100 waypoints, minted separately from the public sale for giveaways and contributor allocations.</li>
+            <li>No allowlist or presale tiers — the public mint is the only mint.</li>
+          </ul>
+          <p>
+            Metadata is unrevealed at mint and switches to the final,
+            ranked artwork once the collection sells out or the team
+            triggers reveal manually — whichever comes first.
+          </p>
+        </Section>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-xs text-muted md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Rovyn. Collectible NFT project. No promised returns. DYOR.</p>
-          <div className="flex gap-6">
-            <Link href="/whitepaper" className="hover:text-paper">Whitepaper</Link>
-            <a href="#" className="hover:text-paper">Contract ↗</a>
+        <Section n="03" title="Where mint proceeds go">
+          <p>
+            Mint proceeds are held in the contract until withdrawn by the
+            project wallet. There is no automatic liquidity pool seeded from
+            mint funds, because Rovyn does not have a token — proceeds fund
+            three things, in order of priority:
+          </p>
+          <ol className="list-decimal space-y-2 pl-5">
+            <li>Ongoing hosting and metadata costs for the collection.</li>
+            <li>Artist and contributor payments for the reserved allocation.</li>
+            <li>Treasury reserve for the Landmark and Horizon waypoints described in the roadmap.</li>
+          </ol>
+          <p>
+            The withdrawal address and any treasury movements will be shared
+            with holders through the project's official channels once the
+            mint concludes.
+          </p>
+        </Section>
+
+        <Section n="04" title="Contract and chain details">
+          <div className="border border-line bg-panel/60 p-5 font-mono text-xs">
+            <dl className="space-y-2">
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Network</dt>
+                <dd className="text-paper">Robinhood Chain (mainnet)</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Chain ID</dt>
+                <dd className="text-paper">4663</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Token standard</dt>
+                <dd className="text-paper">ERC-721</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Contract address</dt>
+                <dd className="text-paper">To be published at deploy time</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-muted">Explorer</dt>
+                <dd className="text-paper">robinhoodchain.blockscout.com</dd>
+              </div>
+            </dl>
           </div>
-        </div>
-      </footer>
+          <p>
+            Always verify the contract address against the project's
+            official channels before minting. This whitepaper will be
+            updated with the live address the moment the contract is
+            deployed and verified.
+          </p>
+        </Section>
+
+        <Section n="05" title="Roadmap">
+          <p>
+            Full detail lives on the <Link href="/#roadmap" className="text-brass underline underline-offset-4">route page</Link>.
+            In short: Bearings and Departure cover setup and the public mint.
+            Open route covers reveal and secondary trading. Landmark and
+            Horizon are funded from the treasury reserve described above and
+            depend on where the collection stands after mint — they are
+            intentions, not commitments with dates attached.
+          </p>
+        </Section>
+
+        <Section n="06" title="Risks">
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Robinhood Chain is a new network; bridges, RPC providers, and tooling are still maturing.</li>
+            <li>Secondary market liquidity for Rovyn is not guaranteed and depends entirely on organic demand.</li>
+            <li>NFT prices are volatile and can go to zero. Only mint with funds you can afford to lose.</li>
+            <li>Smart contracts, even audited ones, can contain bugs. Interact with the contract at your own risk.</li>
+          </ul>
+        </Section>
+
+        <Section n="07" title="Contact">
+          <p>
+            Official links will be posted on the project's mint page as they
+            go live. Treat any account, link, or DM not linked from
+            rovyn.xyz as unverified.
+          </p>
+        </Section>
+      </div>
     </main>
   );
 }
