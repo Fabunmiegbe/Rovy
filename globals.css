@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #12151A;
+    color: #EAEAE6;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(201, 162, 75, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(110, 140, 160, 0.05), transparent 45%);
+  }
+  ::selection {
+    background-color: #C9A24B;
+    color: #12151A;
+  }
+  :focus-visible {
+    outline: 2px solid #C9A24B;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .rule {
+    border-color: #2A3038;
+  }
+  .waypoint-line {
+    background: repeating-linear-gradient(
+      to right,
+      #2A3038,
+      #2A3038 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+}
